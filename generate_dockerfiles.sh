@@ -10,9 +10,9 @@ JCE_FLAVORS=(standard unlimited)
 # Dockerfile.jdk.tpl
 # Dockerfile.jdk-dcevm.tpl
 
-JAVA_VERSIONS=(7-80-15 8-92-14 8-102-14 8-111-14 8-121-13-e9e7ea248e2c4826b92b3f075a80e441 8-131-11-d54c1d3a095b4ff2b6607d096fa80163)
+JAVA_VERSIONS=(7-80-15 8-51-16 8-92-14 8-102-14 8-111-14 8-121-13-e9e7ea248e2c4826b92b3f075a80e441 8-131-11-d54c1d3a095b4ff2b6607d096fa80163)
 
-GLIBC_VERSION="2.23-r3"
+GLIBC_VERSION="2.25-r0"
 
 gen_dockerfile() {
   JVM_PACKAGE="$1"
@@ -73,7 +73,7 @@ for version in ${JAVA_VERSIONS[@]}; do
   fi
 
   for JVM_FLAVOR in ${JVM_FLAVORS[@]}; do
-    
+
     if [ "${JVM_MAJOR}" -eq "8" ]; then
       for JAVA_JCE in ${JCE_FLAVORS[@]}; do
         gen_dockerfile $JVM_FLAVOR

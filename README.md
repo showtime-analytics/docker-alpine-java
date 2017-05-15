@@ -10,7 +10,7 @@ This image is based on [AlpineLinux](http://alpinelinux.org/) to keep the size d
 Includes BASH, since many Java applications like to have convoluted BASH start-up scripts.
 
 ### Versions/tags
-All tags upgraded to `alpine:3.4`
+All tags upgraded to `alpine:3.5`
 
 #### MAJOR TAGGING UPDATE
 To allow selection of specific Java version, a **major retagging is taking place**.
