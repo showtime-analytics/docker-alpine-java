@@ -4,17 +4,17 @@ FROM alpine:3.5
 MAINTAINER Alberto Gregoris <alberto@showtimeanalytics.com>
 # Repository forked from https://github.com/anapsix/docker-alpine-java by Anastas Dancha <anapsix@random.io>
 
-LABEL java.version="8u102" \
-      java.full.version="8u102b14" \
-      description="AlpineLinux version 3.5 with a glibc-2.25-r0 and Oracle Java 8u102 package server-jre" \
+LABEL java.version="8u51" \
+      java.full.version="8u51b16" \
+      description="AlpineLinux version 3.5 with a glibc-2.25-r0 and Oracle Java 8u51 package jdk" \
       maintainer="Alberto Gregoris <alberto@showtimeanalytics.com>"
 
 # Java Version and other ENV
 ENV JAVA_VERSION_MAJOR=8 \
-    JAVA_VERSION_MINOR=102 \
-    JAVA_VERSION_BUILD=14 \
-    JAVA_PACKAGE=server-jre \
-    JAVA_JCE=unlimited \
+    JAVA_VERSION_MINOR=51 \
+    JAVA_VERSION_BUILD=16 \
+    JAVA_PACKAGE=jdk \
+    JAVA_JCE=standard \
     JAVA_HOME=/opt/jdk \
     PATH=${PATH}:/opt/jdk/bin \
     GLIBC_VERSION=2.25-r0 \
@@ -36,17 +36,19 @@ RUN set -ex && \
     gunzip /tmp/java.tar.gz && \
     tar -C /opt -xf /tmp/java.tar && \
     ln -s /opt/jdk1.${JAVA_VERSION_MAJOR}.0_${JAVA_VERSION_MINOR} /opt/jdk && \
-    find /opt/jdk/ -maxdepth 1 -mindepth 1 | grep -v jre | xargs rm -rf && \
-    cd /opt/jdk/ && ln -s ./jre/bin ./bin && \
-    if [ "${JAVA_JCE}" == "unlimited" ]; then echo "Installing Unlimited JCE policy" && \
+    if [ "${JAVA_JCE}" == "unlimited" ]; then echo "Installing Unlimited JCE policy" >&2 && \
       curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie" -o /tmp/jce_policy-${JAVA_VERSION_MAJOR}.zip \
         http://download.oracle.com/otn-pub/java/jce/${JAVA_VERSION_MAJOR}/jce_policy-${JAVA_VERSION_MAJOR}.zip && \
       cd /tmp && unzip /tmp/jce_policy-${JAVA_VERSION_MAJOR}.zip && \
-      cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /opt/jdk/jre/lib/security/; \
+      cp -v /tmp/UnlimitedJCEPolicyJDK8/*.jar /opt/jdk/jre/lib/security; \
     fi && \
     sed -i s/#networkaddress.cache.ttl=-1/networkaddress.cache.ttl=10/ $JAVA_HOME/jre/lib/security/java.security && \
     apk del curl glibc-i18n && \
-    rm -rf /opt/jdk/jre/plugin \
+    rm -rf /opt/jdk/*src.zip \
+           /opt/jdk/lib/missioncontrol \
+           /opt/jdk/lib/visualvm \
+           /opt/jdk/lib/*javafx* \
+           /opt/jdk/jre/plugin \
            /opt/jdk/jre/bin/javaws \
            /opt/jdk/jre/bin/jjs \
            /opt/jdk/jre/bin/orbd \

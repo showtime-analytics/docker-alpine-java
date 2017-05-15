@@ -4,15 +4,15 @@ FROM alpine:3.5
 MAINTAINER Alberto Gregoris <alberto@showtimeanalytics.com>
 # Repository forked from https://github.com/anapsix/docker-alpine-java by Anastas Dancha <anapsix@random.io>
 
-LABEL java.version="8u102" \
-      java.full.version="8u102b14" \
-      description="AlpineLinux version 3.5 with a glibc-2.25-r0 and Oracle Java 8u102 package server-jre" \
+LABEL java.version="8u51" \
+      java.full.version="8u51b16" \
+      description="AlpineLinux version 3.5 with a glibc-2.25-r0 and Oracle Java 8u51 package server-jre" \
       maintainer="Alberto Gregoris <alberto@showtimeanalytics.com>"
 
 # Java Version and other ENV
 ENV JAVA_VERSION_MAJOR=8 \
-    JAVA_VERSION_MINOR=102 \
-    JAVA_VERSION_BUILD=14 \
+    JAVA_VERSION_MINOR=51 \
+    JAVA_VERSION_BUILD=16 \
     JAVA_PACKAGE=server-jre \
     JAVA_JCE=unlimited \
     JAVA_HOME=/opt/jdk \

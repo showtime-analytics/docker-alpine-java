@@ -1,9 +1,13 @@
-# AlpineLinux with a glibc-2.23 and Oracle Java %JVM_MAJOR%
-FROM alpine:3.4
+# AlpineLinux with a glibc-2.25-r0 and Oracle Java %JVM_MAJOR%
+FROM alpine:3.5
 
-MAINTAINER Anastas Dancha <anapsix@random.io>
-# thanks to Vladimir Krivosheev <develar@gmail.com> aka @develar for smaller image
-# and Victor Palma <palma.victor@gmail.com> aka @devx for pointing it out
+MAINTAINER Alberto Gregoris <alberto@showtimeanalytics.com>
+# Repository forked from https://github.com/anapsix/docker-alpine-java by Anastas Dancha <anapsix@random.io>
+
+LABEL java.version="%JVM_MAJOR%u%JVM_MINOR%" \
+      java.full.version="%JVM_MAJOR%u%JVM_MINOR%b%JVM_BUILD%" \
+      description="AlpineLinux version 3.5 with a glibc-%GLIBC_VERSION% and Oracle Java %JVM_MAJOR%u%JVM_MINOR% package %JVM_PACKAGE%" \
+      maintainer="Alberto Gregoris <alberto@showtimeanalytics.com>"
 
 # Java Version and other ENV
 ENV JAVA_VERSION_MAJOR=%JVM_MAJOR% \

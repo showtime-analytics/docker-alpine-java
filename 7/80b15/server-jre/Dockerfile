@@ -1,9 +1,13 @@
-# AlpineLinux with a glibc-2.23 and Oracle Java 7
-FROM alpine:3.4
+# AlpineLinux with a glibc-2.25-r0 and Oracle Java 7
+FROM alpine:3.5
 
-MAINTAINER Anastas Dancha <anapsix@random.io>
-# thanks to Vladimir Krivosheev <develar@gmail.com> aka @develar for smaller image
-# and Victor Palma <palma.victor@gmail.com> aka @devx for pointing it out
+MAINTAINER Alberto Gregoris <alberto@showtimeanalytics.com>
+# Repository forked from https://github.com/anapsix/docker-alpine-java by Anastas Dancha <anapsix@random.io>
+
+LABEL java.version="7u80" \
+      java.full.version="7u80b15" \
+      description="AlpineLinux version 3.5 with a glibc-2.25-r0 and Oracle Java 7u80 package server-jre" \
+      maintainer="Alberto Gregoris <alberto@showtimeanalytics.com>"
 
 # Java Version and other ENV
 ENV JAVA_VERSION_MAJOR=7 \
@@ -13,7 +17,7 @@ ENV JAVA_VERSION_MAJOR=7 \
     JAVA_JCE=standard \
     JAVA_HOME=/opt/jdk \
     PATH=${PATH}:/opt/jdk/bin \
-    GLIBC_VERSION=2.23-r3 \
+    GLIBC_VERSION=2.25-r0 \
     LANG=C.UTF-8
 
 # do all in one step
